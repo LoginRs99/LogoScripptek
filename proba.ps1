@@ -64,15 +64,7 @@ Import-Module PSWindowsUpdate
 Write-Host "Windows frissitesek telepitese folyamatban..."
 Get-WindowsUpdate -AcceptAll -Install
 
-# Felhasználói beavatkozás a rendszer újraindítása előtt
-Write-Host "A Windows frissítések telepítése befejeződött."
-$choice = Read-Host "Szeretné újraindítani a számítógépet? (I/N)"
-if ($choice -eq "I" -or $choice -eq "i") {
-    Restart-Computer -Force
-} elseif ($choice -eq "N" -or $choice -eq "n") {
-    Write-Host "A számítógép nem fog újraindulni."
-} else {
-    Write-Host "Érvénytelen válasz. A számítógép automatikusan újraindul 1 percen belül."
-    Start-Sleep -Seconds 60
-    Restart-Computer -Force
-}
+# A számítógép automatikusan újraindul 1 percen belül.
+Write-Host "A Windows frissítések telepítése befejeződött. A számítógép automatikusan újraindul 1 percen belül."
+Start-Sleep -Seconds 60
+Restart-Computer -Force
