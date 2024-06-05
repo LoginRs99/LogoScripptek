@@ -28,16 +28,6 @@ foreach ($program in $programs) {
     Write-Progress -Activity "Programok telepitese" -Status "$currentProgram / $totalPrograms" -PercentComplete $progress
 }
 
-# Office ikon kitétele az asztalra
-$ShortcutFile = "$env:UserProfile\Desktop\Access.lnk"
-$TargetFile = "C:\Program Files\Microsoft Office\root\Office16\MSACCESS.EXE"
-$WScriptShell = New-Object -ComObject WScript.Shell
-$Shortcut = $WScriptShell.CreateShortcut($ShortcutFile)
-$Shortcut.TargetPath = $TargetFile
-$Shortcut.Save()
-
-
-
 # Progress bar eltávolítása
 Write-Progress -Activity "Programok telepitese" -Completed
 
