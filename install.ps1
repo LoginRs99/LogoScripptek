@@ -30,24 +30,29 @@ foreach ($program in $programs) {
 
 Write-Host "Sikeresen feltelepültek a programok."
 
-# Office telepítése az USB meghajtóról
-$usbDriveLetter = Get-WmiObject Win32_Volume | Where-Object { $_.Label -eq 'USB_DRIVE_LABEL' } | Select-Object -ExpandProperty DriveLetter
-if ($usbDriveLetter) {
-    $officeInstallScript = "$usbDriveLetter\Office\install.cmd"
+# MediCat v21.12 meghajtó keresése és Office telepítése
+$medicatDriveLetter = Get-WmiObject Win32_Volume | Where-Object { $_.Label -eq 'MediCat v21.12' } | Select-Object -ExpandProperty DriveLetter
+if ($medicatDriveLetter) {
+    $officeInstallScript = "$medicatDriveLetter\Office\install.cmd"
     if (Test-Path $officeInstallScript) {
-        Write-Host "Microsoft Office telepítése az USB meghajtóról..."
-        Start-Process -FilePath $officeInstallScript -WorkingDirectory "$usbDriveLetter\Office" -Wait
+        Write-Host "Microsoft Office telepítése a MediCat v21.12 USB meghajtóról..."
+        Start-Process -FilePath $officeInstallScript -WorkingDirectory "$medicatDriveLetter\Office" -Wait
         Write-Host "Microsoft Office telepítése befejeződött."
     } else {
-        Write-Host "Nem található az Office telepítési parancsfájl az USB meghajtón."
+        Write-Host "Nem található az Office telepítési parancsfájl a MediCat v21.12 USB meghajtón."
     }
 } else {
-    Write-Host "Nem található USB meghajtó."
+    Write-Host "Nem található MediCat v21.12 USB meghajtó."
 }
+
 
 # Office aktiválása
 Write-Host "Windows és Office aktiválása..."
 powershell "irm https://get.activated.win | iex"
+
+# NuGet provider telepítése
+Write-Host "NuGet provider telepítése..."
+Install-PackageProvider -Name NuGet -Force -Confirm:$false
 
 # Windows frissítések indítása
 Write-Host "Windows frissítések keresése és telepítése..."
