@@ -58,16 +58,11 @@ Write-Host "NuGet provider telepitese..."
 Install-PackageProvider -Name NuGet -Force -Confirm:$false
 
 # Windows frissítések indítása
-Write-Host "Windows frissítések keresése és telepitese..."
+Write-Host "Windows frissítések keresése és telepítése..."
 Install-Module PSWindowsUpdate -Force -SkipPublisherCheck
 Import-Module PSWindowsUpdate
-Write-Host "Windows frissitesek telepitese folyamatban..."
-Get-WindowsUpdate -AcceptAll -Install
-
-# A számítógép automatikusan újraindul 1 percen belül.
-Write-Host "A Windows frissítések telepítése befejeződött. A számítógép automatikusan újraindul 1 percen belül."
-Start-Sleep -Seconds 60
-Restart-Computer -Force
+Write-Host "Windows frissítések telepítése folyamatban..."
+Get-WindowsUpdate -AcceptAll -Install -AutoReboot
 
 # C:\Scripts mappa tartalmának törlése
 Write-Host "A számítógép újraindítása után a C:\Scripts mappa tartalmának törlése..."
