@@ -68,3 +68,7 @@ Get-WindowsUpdate -AcceptAll -Install
 Write-Host "A Windows frissítések telepítése befejeződött. A számítógép automatikusan újraindul 1 percen belül."
 Start-Sleep -Seconds 60
 Restart-Computer -Force
+
+# C:\Scripts mappa tartalmának törlése
+Write-Host "A számítógép újraindítása után a C:\Scripts mappa tartalmának törlése..."
+Remove-Item -Path "C:\Scripts" -Recurse -Force
