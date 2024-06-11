@@ -63,7 +63,3 @@ Install-Module PSWindowsUpdate -Force -SkipPublisherCheck
 Import-Module PSWindowsUpdate
 Write-Host "Windows frissítések telepítése folyamatban..."
 Get-WindowsUpdate -AcceptAll -Install -AutoReboot
-
-# C:\Scripts mappa tartalmának törlése
-Write-Host "A számítógép újraindítása után a C:\Scripts mappa tartalmának törlése..."
-Remove-Item -Path "C:\Scripts" -Recurse -Force
