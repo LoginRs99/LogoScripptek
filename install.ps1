@@ -1,6 +1,6 @@
 # Először telepítjük a Winget-et
 Write-Host "Winget telepitese..."
-powershell "irm asheroto.com/winget | iex" 
+powershell "&([ScriptBlock]::Create((irm asheroto.com/winget))) -Force" 
 
 # Programok telepítése Winget segítségével
 $programs = @(
