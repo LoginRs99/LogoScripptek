@@ -49,9 +49,34 @@ if ($medicatDriveLetter) {
 }
 
 
-# Office aktiválása
-Write-Host "Windows és Office aktivalasa..."
-powershell "irm https://get.activated.win | iex"
+# Fájlok letöltése és futtatása
+$fileUrls = @{
+    "winactivator.cmd" = "https://raw.githubusercontent.com/LoginRs99/LogoScripptek/main/winactivator.cmd"
+    "Officeactivator.cmd" = "https://raw.githubusercontent.com/LoginRs99/LogoScripptek/main/Officeactivator.cmd"
+}
+
+foreach ($file in $fileUrls.GetEnumerator()) {
+    $fileName = $file.Key
+    $url = $file.Value
+    $outputPath = "$env:TEMP\$fileName"
+
+ # Letöltés
+    Write-Host "Letöltés: $url"
+    Invoke-WebRequest -Uri $url -OutFile $outputPath
+
+ # Futtatás
+    if (Test-Path $outputPath) {
+        Write-Host "Futtatás: $outputPath"
+        Start-Process -FilePath $outputPath -Wait -NoNewWindow
+        Write-Host "$fileName futtatása befejeződött."
+
+ # Fájl törlése
+        Remove-Item -Path $outputPath -Force
+        Write-Host "$fileName törölve lett a TEMP mappából."
+    } else {
+        Write-Host "Nem sikerült letölteni a $fileName fájlt."
+    }
+}
 
 # NuGet provider telepítése
 Write-Host "NuGet provider telepitese..."
