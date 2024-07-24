@@ -1,5 +1,5 @@
 # Először telepítjük a Winget-et
-Write-Host "Winget telepitese..."
+Write-Host "Winget telepitése..."
 powershell "&([ScriptBlock]::Create((irm asheroto.com/winget))) -Force" 
 
 # Programok telepítése Winget segítségével
@@ -10,9 +10,8 @@ $programs = @(
     "VideoLAN.VLC",
     "Notepad++.Notepad++",
     "WinRAR.WinRAR",
-    "EclipseAdoptium.Temurin.20.JRE",
-    "abbodi1406.vcredist",
-    "Microsoft.DotNet.Framework.DeveloperPack_4"
+    "EclipseAdoptium.Temurin.22.JRE",
+    "abbodi1406.vcredist"
 )
 
 $totalPrograms = $programs.Count
