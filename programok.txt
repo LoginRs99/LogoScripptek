@@ -1,0 +1,44 @@
+# KATEGÓRIA: ALAPVETÕ ESZKÖZÖK
+Winrar | RARLab.WinRAR
+7zip | 7zip.7zip
+Notepad ++ | Notepad++.Notepad++
+Adobe Acrobat Reader | Adobe.Acrobat.Reader.64-bit
+Visual C++ Redistributable Runtimes | abbodi1406.vcredist
+Temurin java | EclipseAdoptium.Temurin.22.JRE
+Total Commander | Ghisler.TotalCommander
+UniGetUI | SomePythonThings.WingetUIStore
+
+# KATEGÓRIA: INTERNET BÖNGÉSZÕK
+Chrome | Google.Chrome.Canary
+Firefox | Mozilla.Firefox
+Opera GX | Opera.OperaGX
+Brave | Brave.Brave
+
+# KATEGÓRIA: GAMING
+EpicGames | EpicGames.EpicGamesLauncher
+GOG | GOG.Galaxy
+Steam | Valve.Steam
+EA launcher | ElectronicArts.EADesktop
+Ubisoft Connect | Ubisoft.Connect
+
+# KATEGÓRIA: MEDIA
+Discord | Discord.Discord
+VLC | Videolan.Vlc
+Potplayer | Daum.PotPlayer
+Microsoft Teams(free) | Microsoft.Teams.Free
+Zoom | Zoom.Zoom
+Spotify | 9NCBCSZSJRSB
+Deluge | DelugeTeam.Deluge
+Transmission | Transmission.Transmission
+Qbittorent | qBittorrent.qBittorrent
+
+# KATEGÓRIA: TÁVOLI ELÉRÉS
+Rustdesk | RustDesk.RustDesk
+Anydesk | AnyDeskSoftwareGmbH.AnyDesk
+Teamviewer | TeamViewer.TeamViewer
+Ultraviewer | DucFabulous.UltraViewer
+
+
+
+
+
