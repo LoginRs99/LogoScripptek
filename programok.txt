@@ -1,4 +1,4 @@
-# KATEG”RIA: ALAPVET’ ESZK÷Z÷K
+# KATEG√ìRIA: ALAPVET√ï ESZK√ñZ√ñK
 Winrar | RARLab.WinRAR
 7zip | 7zip.7zip
 Notepad ++ | Notepad++.Notepad++
@@ -8,20 +8,20 @@ Temurin java | EclipseAdoptium.Temurin.22.JRE
 Total Commander | Ghisler.TotalCommander
 UniGetUI | SomePythonThings.WingetUIStore
 
-# KATEG”RIA: INTERNET B÷NG…SZ’K
-Chrome | Google.Chrome.Canary
+# KATEG√ìRIA: INTERNET B√ñNG√âSZ√ïK
+Chrome | Google.Chrome
 Firefox | Mozilla.Firefox
 Opera GX | Opera.OperaGX
 Brave | Brave.Brave
 
-# KATEG”RIA: GAMING
+# KATEG√ìRIA: GAMING
 EpicGames | EpicGames.EpicGamesLauncher
 GOG | GOG.Galaxy
 Steam | Valve.Steam
 EA launcher | ElectronicArts.EADesktop
 Ubisoft Connect | Ubisoft.Connect
 
-# KATEG”RIA: MEDIA
+# KATEG√ìRIA: MEDIA
 Discord | Discord.Discord
 VLC | Videolan.Vlc
 Potplayer | Daum.PotPlayer
@@ -32,7 +32,7 @@ Deluge | DelugeTeam.Deluge
 Transmission | Transmission.Transmission
 Qbittorent | qBittorrent.qBittorrent
 
-# KATEG”RIA: T¡VOLI EL…R…S
+# KATEG√ìRIA: T√ÅVOLI EL√âR√âS
 Rustdesk | RustDesk.RustDesk
 Anydesk | AnyDeskSoftwareGmbH.AnyDesk
 Teamviewer | TeamViewer.TeamViewer
