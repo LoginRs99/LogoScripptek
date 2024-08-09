@@ -50,6 +50,7 @@ $selectedChoice = "$scriptDirectory\programok.txt"
 
 # Olvasd be a programokat es winget id-ket
 if (Test-Path $selectedChoice) {
+    Write-Host "Fajl megtalalva: $selectedChoice"
     $lines = Get-Content $selectedChoice
     $categoryOrder = @()
     $categoryProgramMap = @{}
@@ -61,10 +62,12 @@ if (Test-Path $selectedChoice) {
 
     # Olvassuk be a fajl tartalmat
     foreach ($line in $lines) {
+        Write-Host "Beolvasott sor: $line"  # Hibakereso info
         if ($line.Trim() -eq '' -or $line -match '^\s*#') {
             # Ha a sor ures vagy kommentar
-            if ($line -match '^\s*#\s*Kategoria:\s*(.+)') {
+            if ($line -match '^\s*#\s*KATEGÓRIA:\s*(.+)') {
                 $currentCategory = $matches[1]
+                Write-Host "Aktualis kategoria: $currentCategory"  # Hibakereso info
                 $categoryOrder += $currentCategory
                 if (-not $categoryProgramMap.ContainsKey($currentCategory)) {
                     $categoryProgramMap[$currentCategory] = @{}
@@ -76,6 +79,7 @@ if (Test-Path $selectedChoice) {
             if ($parts.Length -eq 2) {
                 $programName = $parts[0].Trim()
                 $wingetId = $parts[1].Trim()
+                Write-Host "Program: $programName, ID: $wingetId"  # Hibakereso info
                 $programList[$currentIndex] = $wingetId
                 $programMap[$wingetId] = $programName  # Hash tabla modositva a winget id alapjan
                 $programStatus[$currentIndex] = $false  # Alapertelmezetten nem telepitendo
@@ -99,7 +103,7 @@ if (Test-Path $selectedChoice) {
                 foreach ($index in $categoryProgramMap[$category].Keys | Sort-Object) {
                     $programName = $categoryProgramMap[$category][$index]
                     $color = if ($programStatus[$index]) { "Green" } else { "White" }
-                    Write-Host "$index. $programName"
+                    Write-Host "$index. $programName" -ForegroundColor $color
                 }
             }
         }
