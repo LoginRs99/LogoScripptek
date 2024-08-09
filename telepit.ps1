@@ -1,3 +1,4 @@
+chcp 65001;
 Set-ExecutionPolicy Bypass -Scope Process -Force;
 
 # Ellenőrizzük, hogy adminisztrátori jogokkal fut-e a script
