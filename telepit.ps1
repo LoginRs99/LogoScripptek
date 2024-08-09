@@ -1,4 +1,4 @@
-chcp 65001;
+[System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8;
 Set-ExecutionPolicy Bypass -Scope Process -Force;
 
 # Ellenőrizzük, hogy adminisztrátori jogokkal fut-e a script
