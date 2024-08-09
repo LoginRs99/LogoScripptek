@@ -13,10 +13,10 @@ if '%errorlevel%' NEQ '0' (
 :MENU
 cls
 echo Valassz egy opciot:
-echo 1. Programok/winget telepitese
-echo 2. Szamitogep informacioi legyujtese
-echo 3. Office Aktivator
-echo 4. Windows Aktivator
+echo 1. Programok/winget telepitese(winget)
+echo 2. Szamitogep informacioi legyujtese(sajat)
+echo 3. Office Aktivator(massgrave.dev)
+echo 4. Windows Aktivator(massgrave.dev)
 echo 5. Kilepes
 set /p option=Valasztas:
 
@@ -61,7 +61,7 @@ goto MENU
 :OfficeActivator
 :: Letoltes es futtatas
 echo Letoltes folyamatban...
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/LoginRs99/LogoScripptek/main/Officeactivator.cmd' -OutFile '%TEMP%\Officeactivator.cmd'"
+powershell -Command "Invoke-WebRequest -Uri 'https://github.com/massgravel/Microsoft-Activation-Scripts/blob/master/MAS/Separate-Files-Version/Activators/Ohook_Activation_AIO.cmd' -OutFile '%TEMP%\Officeactivator.cmd'"
 
 :: Ellenorzi, hogy a letoltes sikeres volt-e
 if exist "%TEMP%\Officeactivator.cmd" (
@@ -77,7 +77,7 @@ goto MENU
 :WindowsActivator
 :: Letoltes es futtatas
 echo Letoltes folyamatban...
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/LoginRs99/LogoScripptek/main/winactivator.cmd' -OutFile '%TEMP%\winactivator.cmd'"
+powershell -Command "Invoke-WebRequest -Uri 'https://github.com/massgravel/Microsoft-Activation-Scripts/blob/master/MAS/Separate-Files-Version/Activators/Online_KMS_Activation.cmd' -OutFile '%TEMP%\winactivator.cmd'"
 
 :: Ellenorzi, hogy a letoltes sikeres volt-e
 if exist "%TEMP%\winactivator.cmd" (
