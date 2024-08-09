@@ -1,4 +1,4 @@
-[System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8;
+[System.Console]::OutputEncoding = New-Object System.Text.UTF8Encoding $true;
 Set-ExecutionPolicy Bypass -Scope Process -Force;
 
 # Ellenőrizzük, hogy adminisztrátori jogokkal fut-e a script
