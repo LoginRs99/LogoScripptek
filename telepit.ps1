@@ -1,4 +1,4 @@
-# Ellenőrizzük, hogy adminisztrátori jogokkal fut-e a script
+# Ellenorizzuk, hogy adminisztratori jogokkal fut-e a script
 function Test-Admin {
     try {
         $admin = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
@@ -9,12 +9,12 @@ function Test-Admin {
 }
 
 if (-not (Test-Admin)) {
-    Write-Host "A script adminisztrátori jogokkal való futtatása szükséges!" -ForegroundColor Red
+    Write-Host "A script adminisztratori jogokkal valo futtatasa szukseges!"
     Start-Process powershell -ArgumentList "Start-Process PowerShell -ArgumentList '$($MyInvocation.MyCommand.Definition)' -Verb RunAs" -Verb RunAs
     exit
 }
 
-# Ellenőrizzük, hogy a winget telepítve van-e
+# Ellenorizzuk, hogy a winget telepitve van-e
 function Test-Winget {
     try {
         winget --version > $null 2>&1
@@ -25,45 +25,45 @@ function Test-Winget {
 }
 
 if (-not (Test-Winget)) {
-    Write-Host "A winget nincs telepítve." -ForegroundColor Yellow
-    $installWinget = Read-Host "Szeretné telepíteni a winget-et? (i/n)"
+    Write-Host "A winget nincs telepitve."
+    $installWinget = Read-Host "Szeretne telepiteni a winget-et? (i/n)"
     if ($installWinget -eq 'i') {
         try {
-            Write-Host "Winget telepítése..."
+            Write-Host "Winget telepitese..."
             &([ScriptBlock]::Create((irm asheroto.com/winget))) -Force
-            Write-Host "A winget telepítése sikeres volt." -ForegroundColor Green
+            Write-Host "A winget telepitese sikeres volt."
         } catch {
-            Write-Host "Hiba történt a winget telepítése közben." -ForegroundColor Red
+            Write-Host "Hiba tortent a winget telepitese kozben."
             exit
         }
     } else {
-        Write-Host "A winget telepítése kihagyva. A script nem tudja folytatni a futást winget nélkül." -ForegroundColor Red
+        Write-Host "A winget telepitese kihagyva. A script nem tudja folytatni a futast winget nelkul."
         exit
     }
 }
 
-# Az aktuális könyvtár elérési útja
+# Az aktualis konyvtar eleresi utja
 $scriptDirectory = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
 
-# Alapértelmezett fájl: programok.txt
+# Alapertelmezett fajl: programok.txt
 $selectedChoice = "$scriptDirectory\programok.txt"
 
-# Olvasd be a programokat és winget id-ket
+# Olvasd be a programokat es winget id-ket
 if (Test-Path $selectedChoice) {
     $lines = Get-Content $selectedChoice
     $categoryOrder = @()
     $categoryProgramMap = @{}
     $programList = @{}
     $programMap = @{}
-    $programStatus = @{}  # Ez a hash tábla tartja nyilván a programok állapotát
+    $programStatus = @{}  # Ez a hash tabla tartja nyilvan a programok allapotat
     $currentCategory = ''
     $currentIndex = 1
 
-    # Olvassuk be a fájl tartalmát
+    # Olvassuk be a fajl tartalmat
     foreach ($line in $lines) {
         if ($line.Trim() -eq '' -or $line -match '^\s*#') {
-            # Ha a sor üres vagy kommentár
-            if ($line -match '^\s*#\s*Kategória:\s*(.+)') {
+            # Ha a sor ures vagy kommentar
+            if ($line -match '^\s*#\s*Kategoria:\s*(.+)') {
                 $currentCategory = $matches[1]
                 $categoryOrder += $currentCategory
                 if (-not $categoryProgramMap.ContainsKey($currentCategory)) {
@@ -71,14 +71,14 @@ if (Test-Path $selectedChoice) {
                 }
             }
         } else {
-            # Program neve és winget id párok
+            # Program neve es winget id parok
             $parts = $line -split '\s*\|\s*'
             if ($parts.Length -eq 2) {
                 $programName = $parts[0].Trim()
                 $wingetId = $parts[1].Trim()
                 $programList[$currentIndex] = $wingetId
-                $programMap[$wingetId] = $programName  # Hash tábla módosítva a winget id alapján
-                $programStatus[$currentIndex] = $false  # Alapértelmezés szerint nem telepítendő (fehér)
+                $programMap[$wingetId] = $programName  # Hash tabla modositva a winget id alapjan
+                $programStatus[$currentIndex] = $false  # Alapertelmezetten nem telepitendo
                 if ($currentCategory -ne '' -and $categoryProgramMap.ContainsKey($currentCategory)) {
                     $categoryProgramMap[$currentCategory][$currentIndex] = $programName
                 }
@@ -87,45 +87,45 @@ if (Test-Path $selectedChoice) {
         }
     }
 
-    # Végtelen ciklus a felhasználói interakcióhoz
+    # Vegtelen ciklus a felhasznaloi interakciohoz
     while ($true) {
-        # Kategóriák és programok kiírása
+        # Kategoriak es programok kiirasa
         Clear-Host
-        Write-Host "`nElérhető programok:`n"
+        Write-Host "`nElerheto programok:`n"
 
         foreach ($category in $categoryOrder) {
-            Write-Host "`n# Kategória: $category" -ForegroundColor Red -BackgroundColor Black
+            Write-Host "`n# Kategoria: $category"
             if ($categoryProgramMap.ContainsKey($category)) {
                 foreach ($index in $categoryProgramMap[$category].Keys | Sort-Object) {
                     $programName = $categoryProgramMap[$category][$index]
                     $color = if ($programStatus[$index]) { "Green" } else { "White" }
-                    Write-Host "$index. $programName" -ForegroundColor $color
+                    Write-Host "$index. $programName"
                 }
             }
         }
 
-        Write-Host ""  # Üres sor hozzáadása a programok listája után
+        Write-Host ""  # Ures sor hozzaadasa a programok listaja utan
 
-        # Felhasználói bemenet
-        $input = Read-Host "Válaszd ki a telepítendő programokat (pl. 1,2,5), vagy nyomd meg az Entert a folytatáshoz"
+        # Felhasznaloi bemenet
+        $input = Read-Host "Valaszd ki a telepitendo programokat (pl. 1,2,5), vagy nyomd meg az Entert a folytatashoz"
 
         if ($input -eq '') {
             break
         }
 
         if ($input -eq 'A') {
-            # Visszaállít minden programot alapértelmezett állapotba
+            # Visszaallit minden programot alapertelmezett allapotba
             foreach ($key in $programStatus.Keys) {
                 $programStatus[$key] = $false
             }
         } else {
-            # Több szám bevitele vesszővel elválasztva
+            # Tobbszam bevitele vesszovel elvalasztva
             $selectedIndexes = $input -split '\s*,\s*' | ForEach-Object { [int]$_ }
             foreach ($index in $selectedIndexes) {
                 if ($programStatus.ContainsKey($index)) {
-                    $programStatus[$index] = -not $programStatus[$index]  # Váltás igazra vagy hamisra
+                    $programStatus[$index] = -not $programStatus[$index]  # Valtas igazra vagy hamisra
                 } else {
-                    Write-Host "Érvénytelen szám: $index. Kérlek, próbáld újra." -ForegroundColor Yellow
+                    Write-Host "Ervenytelen szam: $index. Kerlek, probald ujra."
                 }
             }
         }
@@ -135,23 +135,23 @@ if (Test-Path $selectedChoice) {
     $selectedProgramNames = $selectedPrograms | ForEach-Object { $programMap[$_] }
 
     if ($selectedPrograms.Count -gt 0) {
-        Write-Host "`nKiválasztott programok a telepítéshez: $($selectedProgramNames -join ', ')`n"
+        Write-Host "`nKivalasztott programok a telepiteshez: $($selectedProgramNames -join ', ')`n"
         foreach ($programId in $selectedPrograms) {
             $programName = $programMap[$programId]
-            Write-Host "Telepítés: $programName"
+            Write-Host "Telepites: $programName"
             try {
                 winget install --id=$programId --silent --accept-package-agreements --accept-source-agreements --disable-interactivity
             } catch {
-                Write-Host "Hiba történt a $programName telepítése közben." -ForegroundColor Red
+                Write-Host "Hiba tortent a $programName telepitese kozben."
             }
         }
     } else {
-        Write-Host "Nincsenek kiválasztott programok a telepítéshez." -ForegroundColor Yellow
+        Write-Host "Nincsenek kivalasztott programok a telepiteshez."
     }
 } else {
-    Write-Host "A kiválasztott fájl nem található: $selectedChoice" -ForegroundColor Red
+    Write-Host "A kivalasztott fajl nem talalhato: $selectedChoice"
 }
 
-# Várakozás 5 másodpercig, mielőtt a PowerShell bezárul
-Write-Host "A script befejeződött. A PowerShell ablak 5 másodperc múlva bezárul..." -ForegroundColor Green
+# Varakozas 5 masodpercig, mielott a PowerShell bezarul
+Write-Host "A script befejezodott. A PowerShell ablak 5 masodperc mulva bezarul..."
 Start-Sleep -Seconds 5
