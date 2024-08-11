@@ -25,17 +25,19 @@ function Test-Winget {
 }
 
 if (-not (Test-Winget)) {
-    Write-Host "A winget nincs telepitve, telepítés szükséges." -ForegroundColor Yellow
     try {
-        Write-Host "Winget telepitese..."
-        &([ScriptBlock]::Create((irm asheroto.com/winget))) -Force
-        Write-Host "A winget telepitese sikeres volt." -ForegroundColor Green
+        # Letöltjük a winget telepítő scriptet egy fájlba
+        $wingetScriptPath = "$env:TEMP\InstallWinget.ps1"
+        Invoke-WebRequest -Uri "https://asheroto.com/winget" -OutFile $wingetScriptPath
+
+        # A letöltött script futtatása külön PowerShell folyamatban
+        Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File $wingetScriptPath" -Wait
+
+        # Fájl törlése a telepítés után
+        Remove-Item $wingetScriptPath -Force
     } catch {
-        Write-Host "Hiba tortent a winget telepitese kozben." -ForegroundColor Red
         exit
     }
-} else {
-    Write-Host "A winget mar telepitve van." -ForegroundColor Green
 }
 
 # Beagyazott programok es winget ID-k listaja
