@@ -17,14 +17,16 @@ echo 1. Programok/winget telepitese(winget)
 echo 2. Szamitogep informacioi legyujtese(sajat)
 echo 3. Office Aktivator(massgrave.dev)
 echo 4. Windows Aktivator(massgrave.dev)
-echo 5. Kilepes
+echo 5. Chris Titus Tech Script(https://github.com/ChrisTitusTech/winutil)
+echo 6. Kilepes
 set /p option=Valasztas:
 
 if "%option%"=="1" goto DownloadAndRun
 if "%option%"=="2" goto DownloadToDesktop
 if "%option%"=="3" goto OfficeActivator
 if "%option%"=="4" goto WindowsActivator
-if "%option%"=="5" exit
+if "%option%"=="5" goto ChrisTitusTech
+if "%option%"=="6" exit
 goto MENU
 
 :DownloadAndRun
@@ -87,5 +89,12 @@ if exist "%TEMP%\winactivator.cmd" (
 ) else (
     echo Hiba tortent a script letoltese soran.
 )
+pause
+goto MENU
+
+:ChrisTitusTech
+:: Letoltes es futtatas
+echo Letoltes folyamatban...
+powershell -Command "irm 'https://christitus.com/win' | iex"
 pause
 goto MENU
