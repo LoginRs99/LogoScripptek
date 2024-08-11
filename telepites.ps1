@@ -25,21 +25,17 @@ function Test-Winget {
 }
 
 if (-not (Test-Winget)) {
-    Write-Host "A winget nincs telepitve." -ForegroundColor Yellow
-    $installWinget = Read-Host "Szeretne telepiteni a winget-et? (i/n)"
-    if ($installWinget -eq 'i') {
-        try {
-            Write-Host "Winget telepitese..."
-            &([ScriptBlock]::Create((irm asheroto.com/winget))) -Force
-            Write-Host "A winget telepitese sikeres volt." -ForegroundColor Green
-        } catch {
-            Write-Host "Hiba tortent a winget telepitese kozben." -ForegroundColor Red
-            exit
-        }
-    } else {
-        Write-Host "A winget telepitese kihagyva. A script nem tudja folytatni a futast winget nelkul." -ForegroundColor Red
+    Write-Host "A winget nincs telepitve, telepítés szükséges." -ForegroundColor Yellow
+    try {
+        Write-Host "Winget telepitese..."
+        &([ScriptBlock]::Create((irm asheroto.com/winget))) -Force
+        Write-Host "A winget telepitese sikeres volt." -ForegroundColor Green
+    } catch {
+        Write-Host "Hiba tortent a winget telepitese kozben." -ForegroundColor Red
         exit
     }
+} else {
+    Write-Host "A winget mar telepitve van." -ForegroundColor Green
 }
 
 # Beagyazott programok es winget ID-k listaja
