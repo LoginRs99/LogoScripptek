@@ -42,9 +42,6 @@ if (-not (Test-Winget)) {
     }
 }
 
-# A script itt folytatódik...
-Write-Host "Winget már telepítve van, folytatás..."
-
 # Beagyazott programok es winget ID-k listaja
 $programData = @"
 # KATEGORIA: ALAPVETO ESZKOZOK
