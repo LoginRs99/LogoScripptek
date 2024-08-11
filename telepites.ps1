@@ -14,16 +14,6 @@ if (-not (Test-Admin)) {
     exit
 }
 
-# Ellenorizzuk, hogy a winget telepitve van-e
-function Test-Winget {
-    try {
-        winget --version > $null 2>&1
-        return $true
-    } catch {
-        return $false
-    }
-}
-
 # Ellenőrizzük, hogy a winget elérhető-e
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
     Write-Host "Winget nem található, telepítés folyamatban..."
