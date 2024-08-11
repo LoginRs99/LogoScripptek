@@ -33,18 +33,18 @@ Write-Progress -Activity "Programok telepitese" -Completed
 Write-Host "Sikeresen feltelepultek a programok."
 
 # MediCat v21.12 meghajtó keresése és Office telepítése
-$medicatDriveLetter = Get-WmiObject Win32_Volume | Where-Object { $_.Label -eq 'MediCat v21.12' } | Select-Object -ExpandProperty DriveLetter
+$medicatDriveLetter = Get-WmiObject Win32_Volume | Where-Object { $_.Label -eq 'BencePendrive' } | Select-Object -ExpandProperty DriveLetter
 if ($medicatDriveLetter) {
     $officeInstallScript = "$medicatDriveLetter\Office\install.cmd"
     if (Test-Path $officeInstallScript) {
-        Write-Host "Microsoft Office telepítése a MediCat v21.12 USB meghajtorol..."
+        Write-Host "Microsoft Office telepítése a BencePendrive USB meghajtorol..."
         Start-Process -FilePath $officeInstallScript -WorkingDirectory "$medicatDriveLetter\Office" -Wait
         Write-Host "Microsoft Office telepitese befejezodott."
     } else {
-        Write-Host "Nem található az Office telepitesi parancsfajl a MediCat v21.12 USB meghajtón."
+        Write-Host "Nem található az Office telepitesi parancsfajl a BencePendrive USB meghajtón."
     }
 } else {
-    Write-Host "Nem található MediCat v21.12 USB meghajto."
+    Write-Host "Nem található BencePendrive USB meghajto."
 }
 
 
