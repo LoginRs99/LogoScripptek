@@ -1,3 +1,14 @@
+# Rendszergazdai jogosultság ellenőrzése
+If (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator))
+{
+    Write-Host "A script nem rendszergazdai jogokkal fut. Újraindítás rendszergazdaként..."
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    Exit
+}
+
+# Execution Policy beállítása
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+
 # Először telepítjük a Winget-et
 Write-Host "Winget telepitése..."
 powershell "&([ScriptBlock]::Create((irm asheroto.com/winget))) -Force" 
