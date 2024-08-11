@@ -24,23 +24,27 @@ function Test-Winget {
     }
 }
 
-if (-not (Test-Winget)) {
-    Write-Host "A winget nincs telepitve." -ForegroundColor Yellow
-    $installWinget = Read-Host "Szeretne telepiteni a winget-et? (i/n)"
-    if ($installWinget -eq 'i') {
-        try {
-            Write-Host "Winget telepitese..."
-            &([ScriptBlock]::Create((irm asheroto.com/winget))) -Force
-            Write-Host "A winget telepitese sikeres volt." -ForegroundColor Green
-        } catch {
-            Write-Host "Hiba tortent a winget telepitese kozben." -ForegroundColor Red
-            exit
-        }
+# Ellenőrizzük, hogy a winget elérhető-e
+if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+    Write-Host "Winget nem található, telepítés folyamatban..."
+    
+    # Winget automatikus telepítése egy külön folyamatban
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `&([ScriptBlock]::Create((irm asheroto.com/winget)))`" -Wait
+
+    # Várunk néhány másodpercet a telepítés után
+    Start-Sleep -Seconds 10
+
+    # Újra ellenőrizzük, hogy sikeresen települt-e
+    if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+        Write-Host "Hiba történt a winget telepítése közben. A script leáll."
+        exit 1
     } else {
-        Write-Host "A winget telepitese kihagyva. A script nem tudja folytatni a futast winget nelkul." -ForegroundColor Red
-        exit
+        Write-Host "Winget sikeresen telepítve."
     }
 }
+
+# A script itt folytatódik...
+Write-Host "Winget már telepítve van, folytatás..."
 
 # Beagyazott programok es winget ID-k listaja
 $programData = @"
