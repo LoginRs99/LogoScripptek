@@ -8,10 +8,17 @@ function Test-Admin {
     }
 }
 
+# Ellenőrizzük, hogy a szkript adminisztrátorként fut-e
+param (
+    [switch]$isAdminRestart
+)
+
 if (-not (Test-Admin)) {
-    Write-Host "A script adminisztratori jogokkal valo futtatasa szukseges!" -ForegroundColor Red
-    Start-Process powershell -ArgumentList "Start-Process PowerShell -ArgumentList '$($MyInvocation.MyCommand.Definition)' -Verb RunAs" -Verb RunAs
-    exit
+    if (-not $isAdminRestart) {
+        Write-Host "A script adminisztratori jogokkal valo futtatasa szukseges!" -ForegroundColor Red
+        Start-Process powershell -ArgumentList "Start-Process PowerShell -ArgumentList '$($MyInvocation.MyCommand.Definition) -isAdminRestart' -Verb RunAs" -Verb RunAs
+        exit
+    }
 }
 
 # Ellenőrizzük, hogy a winget elérhető-e
