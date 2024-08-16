@@ -14,31 +14,9 @@ if (-not (Test-Admin)) {
     exit
 }
 
-# Ellenorizzuk, hogy a winget telepitve van-e
-function Test-Winget {
-    try {
-        winget --version > $null 2>&1
-        return $true
-    } catch {
-        return $false
-    }
-}
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+powershell "&([ScriptBlock]::Create((irm asheroto.com/winget))) -Force"
 
-if (-not (Test-Winget)) {
-    try {
-        # Letöltjük a winget telepítő scriptet egy fájlba
-        $wingetScriptPath = "$env:TEMP\InstallWinget.ps1"
-        Invoke-WebRequest -Uri "https://asheroto.com/winget" -OutFile $wingetScriptPath
-
-        # A letöltött script futtatása külön PowerShell folyamatban
-        Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File $wingetScriptPath" -Wait
-
-        # Fájl törlése a telepítés után
-        Remove-Item $wingetScriptPath -Force
-    } catch {
-        exit
-    }
-}
 
 # Beagyazott programok es winget ID-k listaja
 $programData = @"
