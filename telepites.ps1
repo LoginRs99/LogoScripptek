@@ -19,6 +19,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 # Lekeri a telepített winget verzióját
 $localVersion = winget --version
 
+# Távolítja el a nem numerikus karaktereket a verzióból (ha van pl. "v" előtag)
+$localVersion = $localVersion -replace '[^0-9.]', ''
+
 # Lekéri a legfrissebb winget verziót az internetről (GitHub API használata)
 $latestVersion = (Invoke-RestMethod -Uri "https://api.github.com/repos/microsoft/winget-cli/releases/latest").tag_name
 
