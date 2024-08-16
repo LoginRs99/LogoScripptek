@@ -15,7 +15,23 @@ if (-not (Test-Admin)) {
 }
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-powershell "&([ScriptBlock]::Create((irm asheroto.com/winget))) -Force"
+
+# Lekeri a telepített winget verzióját
+$localVersion = winget --version
+
+# Lekéri a legfrissebb winget verziót az internetről (GitHub API használata)
+$latestVersion = (Invoke-RestMethod -Uri "https://api.github.com/repos/microsoft/winget-cli/releases/latest").tag_name
+
+# Távolítja el a verzió előtti "v" betűt, ha szükséges
+$latestVersion = $latestVersion.TrimStart('v')
+
+# Összehasonlítja a verziókat, és ha frissítés szükséges, futtatja a frissítést
+if ($localVersion -ne $latestVersion) {
+    Write-Host "Frissités szukseges: $localVersion -> $latestVersion"
+    powershell "&([ScriptBlock]::Create((irm asheroto.com/winget))) -Force"
+} else {
+    Write-Host "A winget naprakesz, nincs szükség frissitesre."
+}
 
 # Beagyazott programok es winget ID-k listaja
 $programData = @"
