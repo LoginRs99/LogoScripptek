@@ -71,6 +71,9 @@ Rustdesk | RustDesk.RustDesk
 Anydesk | AnyDeskSoftwareGmbH.AnyDesk
 Teamviewer | TeamViewer.TeamViewer
 Ultraviewer | DucFabulous.UltraViewer
+
+# KATEGORIA: Rendszer Informacio
+FastFetch | fastfetch
 "@
 
 # Olvasd be a programokat es winget id-ket
