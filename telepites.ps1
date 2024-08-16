@@ -17,7 +17,6 @@ if (-not (Test-Admin)) {
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 powershell "&([ScriptBlock]::Create((irm asheroto.com/winget))) -Force"
 
-
 # Beagyazott programok es winget ID-k listaja
 $programData = @"
 # KATEGORIA: ALAPVETO ESZKOZOK
