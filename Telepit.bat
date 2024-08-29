@@ -15,18 +15,16 @@ cls
 echo Valassz egy opciot:
 echo 1. Programok/winget telepitese(winget)
 echo 2. Szamitogep informacioi legyujtese(sajat)
-echo 3. Office Aktivator(massgrave.dev)
-echo 4. Windows Aktivator(massgrave.dev)
-echo 5. Chris Titus Tech Script(https://github.com/ChrisTitusTech/winutil)
-echo 6. Kilepes
+echo 3. Chris Titus Tech Script(https://github.com/ChrisTitusTech/winutil)
+echo 4. Microsoft Activation Scripts (MAS)
+echo 5. Kilepes
 set /p option=Valasztas:
 
 if "%option%"=="1" goto DownloadAndRun
 if "%option%"=="2" goto DownloadToDesktop
-if "%option%"=="3" goto OfficeActivator
-if "%option%"=="4" goto WindowsActivator
-if "%option%"=="5" goto ChrisTitusTech
-if "%option%"=="6" exit
+if "%option%"=="3" goto ChrisTitusTech
+if "%option%"=="4" goto MAS
+if "%option%"=="5" exit
 goto MENU
 
 :DownloadAndRun
@@ -60,41 +58,16 @@ if exist "%desktop%\Informaciok.bat" (
 pause
 goto MENU
 
-:OfficeActivator
-:: Letoltes es futtatas
-echo Letoltes folyamatban...
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/LoginRs99/LogoScripptek/main/Officeactivator.cmd' -OutFile '%TEMP%\Officeactivator.cmd'"
-
-:: Ellenorzi, hogy a letoltes sikeres volt-e
-if exist "%TEMP%\Officeactivator.cmd" (
-    echo A script letoltese sikeres volt.
-    echo A script futtatasa...
-    call "%TEMP%\Officeactivator.cmd"
-) else (
-    echo Hiba tortent a script letoltese soran.
-)
-pause
-goto MENU
-
-:WindowsActivator
-:: Letoltes es futtatas
-echo Letoltes folyamatban...
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/LoginRs99/LogoScripptek/main/winactivator.cmd' -OutFile '%TEMP%\winactivator.cmd'"
-
-:: Ellenorzi, hogy a letoltes sikeres volt-e
-if exist "%TEMP%\winactivator.cmd" (
-    echo A script letoltese sikeres volt.
-    echo A script futtatasa...
-    call "%TEMP%\winactivator.cmd"
-) else (
-    echo Hiba tortent a script letoltese soran.
-)
-pause
-goto MENU
-
 :ChrisTitusTech
 :: Letoltes es futtatas
 echo Letoltes folyamatban...
 powershell -Command "irm 'https://christitus.com/win' | iex"
+pause
+goto MENU
+
+:MAS
+:: Microsoft Activation Scripts letoltese es futtatasa
+echo Microsoft Activation Scripts letoltese es futtatasa...
+powershell -Command "irm https://get.activated.win | iex"
 pause
 goto MENU
