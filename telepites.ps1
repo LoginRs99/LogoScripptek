@@ -74,6 +74,12 @@ Ultraviewer | DucFabulous.UltraViewer
 
 # KATEGORIA: Rendszer Informacio
 FastFetch | fastfetch
+
+# KATEGORIA: Gyári Driver Updater
+Dell Command Update | Dell.CommandUpdate.Universal
+My Asus | 9N7R5S6B0ZZH
+Lenovo Vantage | 9NR5B8GVVM13
+MSI Center Pro | 9NQ4LGT81KGC
 "@
 
 # Olvasd be a programokat es winget id-ket
